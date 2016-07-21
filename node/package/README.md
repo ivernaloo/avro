@@ -1,23 +1,28 @@
-# AVRO
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
 
-研究了两种方案 python 和 JS
+http://www.apache.org/licenses/LICENSE-2.0
 
-## Requirement
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
 
-Linux环境上的安装
 
-
-    import avro.schema
-
-
-## Node版本
-
-### Avro-js
+# Avro-js
 
 Pure JavaScript implementation of the [Avro specification](https://avro.apache.org/docs/current/spec.html).
 
 
-### Features
+## Features
 
 + Fast! Typically twice as fast as JSON with much smaller encodings.
 + Full Avro support, including recursive schemas, sort order, and evolution.
@@ -26,7 +31,7 @@ Pure JavaScript implementation of the [Avro specification](https://avro.apache.o
 + No dependencies, `avro-js` even runs in the browser.
 
 
-### Installation
+## Installation
 
 ```bash
 $ npm install avro-js
@@ -36,35 +41,35 @@ $ npm install avro-js
 browsers via [browserify][].
 
 
-### Documentation
+## Documentation
 
 See `doc/` folder.
 
 
-### Examples
+## Examples
 
 Inside a node.js module, or using browserify:
 
-```
+```javascript
 var avro = require('avro-js');
 ```
 
 + Encode and decode objects:
 
-```javascript
-// We can declare a schema inline:
-var type = avro.parse({
-name: 'Pet',
-type: 'record',
-fields: [
-  {name: 'kind', type: {name: 'Kind', type: 'enum', symbols: ['CAT', 'DOG']}},
-  {name: 'name', type: 'string'}
-]
-});
-var pet = {kind: 'CAT', name: 'Albert'};
-var buf = type.toBuffer(pet); // Serialized object.
-var obj = type.fromBuffer(buf); // {kind: 'CAT', name: 'Albert'}
-```
+  ```javascript
+  // We can declare a schema inline:
+  var type = avro.parse({
+    name: 'Pet',
+    type: 'record',
+    fields: [
+      {name: 'kind', type: {name: 'Kind', type: 'enum', symbols: ['CAT', 'DOG']}},
+      {name: 'name', type: 'string'}
+    ]
+  });
+  var pet = {kind: 'CAT', name: 'Albert'};
+  var buf = type.toBuffer(pet); // Serialized object.
+  var obj = type.fromBuffer(buf); // {kind: 'CAT', name: 'Albert'}
+  ```
 
 + Generate random instances of a schema:
 
@@ -96,8 +101,3 @@ var obj = type.fromBuffer(buf); // {kind: 'CAT', name: 'Albert'}
 [node.js]: https://nodejs.org/en/
 [readable-stream]: https://nodejs.org/api/stream.html#stream_class_stream_readable
 [browserify]: http://browserify.org/
-
-
-
------
-## Problem
