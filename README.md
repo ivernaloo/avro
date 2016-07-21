@@ -45,7 +45,7 @@ See `doc/` folder.
 
 Inside a node.js module, or using browserify:
 
-```
+```js
 var avro = require('avro-js');
 ```
 
@@ -62,35 +62,38 @@ fields: [
 ]
 });
 var pet = {kind: 'CAT', name: 'Albert'};
-var buf = type.toBuffer(pet); // Serialized object.
-var obj = type.fromBuffer(buf); // {kind: 'CAT', name: 'Albert'}
+var buf = type.toBuffer(pet); // Serialized object. 显示结果为<Buffer 00 0c 41 6c 62 65 72 74>
+var obj = type.fromBuffer(buf); // Pet { kind: 'CAT', name: 'Albert' }
 ```
 
 + Generate random instances of a schema:
 
-  ```javascript
-  // We can also parse a JSON-stringified schema:
-  var type = avro.parse('{"type": "fixed", "name": "Id", "size": 4}');
-  var id = type.random(); // E.g. Buffer([48, 152, 2, 123])
-  ```
+```javascript
+// We can also parse a JSON-stringified schema:
+var type = avro.parse('{"type": "fixed", "name": "Id", "size": 4}');
+var id = type.random(); // 显示结果. <Buffer d3 7d ab 09>
+
+```
 
 + Check whether an object fits a given schema:
 
-  ```javascript
-  // Or we can specify a path to a schema file (not in the browser):
-  var type = avro.parse('./Person.avsc');
-  var person = {name: 'Bob', address: {city: 'Cambridge', zip: '02139'}};
-  var status = type.isValid(person); // Boolean status.
-  ```
+```javascript
+// Or we can specify a path to a schema file (not in the browser):
+// .avsc是schema的模式文件
+var type = avro.parse('./Person.avsc');
+var person = {name: 'Bob', address: {city: 'Cambridge', zip: '02139'}};
+var status = type.isValid(person); // Boolean status.
+```
 
 + Get a [readable stream][readable-stream] of decoded records from an Avro
   container file (not in the browser):
 
-  ```javascript
-  avro.createFileDecoder('./records.avro')
-    .on('metadata', function (type) { /* `type` is the writer's type. */ })
-    .on('data', function (record) { /* Do something with the record. */ });
-  ```
+```javascript
+  // .avro是avro是最后序列化的文件
+avro.createFileDecoder('./records.avro')
+  .on('metadata', function (type) { /* `type` is the writer's type. */ })
+  .on('data', function (record) { /* Do something with the record. */ });
+```
 
 
 [node.js]: https://nodejs.org/en/
