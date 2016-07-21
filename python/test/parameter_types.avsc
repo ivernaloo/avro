@@ -1,0 +1,14 @@
+{"namespace": "scriptaxe.parameter",
+ "type": "enum",
+ "name": "types",
+ "symbols": [
+    "null",
+    "boolean",
+    "int",
+    "long",
+    "float",
+    "double",
+    "bytes",
+    "string"
+    ]
+}
